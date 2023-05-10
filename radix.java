@@ -4,16 +4,13 @@ class RadixSort {
 
     // Using counting sort to sort the elements in the basis of significant places
     void countingSort(int array[], int size, int place) {
-        int[] output = new int[size + 1];
-        int max = array[0];
-        for (int i = 1; i < size; i++) {
-            if (array[i] > max)
-                max = array[i];
-        }
-        int[] count = new int[max + 1];
+        int[] output = new int[size];
 
-        for (int i = 0; i < max; ++i)
-            count[i] = 0;
+        //int[] count = new int[max + 1];
+        int[] count = new int[10];
+
+        for (int i = 0; i < 10; ++i)
+            count[i] = 0; // fill array with zeros
 
         // Calculate count of elements
         for (int i = 0; i < size; i++)
@@ -26,8 +23,10 @@ class RadixSort {
         // Place the elements in sorted order
         for (int i = size - 1; i >= 0; i--) {
             output[count[(array[i] / place) % 10] - 1] = array[i];
+            System.out.println(Arrays.toString(output));
             count[(array[i] / place) % 10]--;
         }
+
 
         for (int i = 0; i < size; i++)
             array[i] = output[i];
@@ -48,13 +47,16 @@ class RadixSort {
         int max = getMax(array, size);
 
         // Apply counting sort to sort elements based on place value.
-        for (int place = 1; max / place > 0; place *= 10)
+        for (int place = 1; max / place > 0; place *= 10) {
             countingSort(array, size, place);
+            System.out.println(Arrays.toString(array));
+        }
     }
 
     // Driver code
     public static void main(String args[]) {
-        int[] data = { 121, 432, 564, 23, 1, 45, 788 };
+        int[] data = { 275, 87, 426, 61, 409, 170, 677, 503,  };
+        //int[] data = { 9,5,7,12,2 };
         int size = data.length;
         RadixSort rs = new RadixSort();
         rs.radixSort(data, size);
