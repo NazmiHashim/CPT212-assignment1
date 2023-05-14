@@ -58,6 +58,7 @@ class RadixSort {
         int[] data = { 275, 87, 426, 61, 409, 170, 677, 503,  };
         //int[] data = { 9,5,7,12,2 };
         int size = data.length;
+        System.out.println("Array Before Sorted: \n" + Arrays.toString(data));
         RadixSort rs = new RadixSort();
         rs.radixSort(data, size);
         System.out.println("Sorted Array in Ascending Order: ");
