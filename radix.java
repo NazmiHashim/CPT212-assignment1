@@ -15,22 +15,41 @@ class RadixSort {
 
         for (int i = 0; i < 10; ++i) {
             count[i] = 0; // fill array with zeros
+            if (i > 1)
+                operationCounter += 3;
+            else
+                operationCounter += 2;
         }
 
         // Calculate count of elements
         for (int i = 0; i < size; i++) {
+            if (i > 1)
+                operationCounter += 3;
+            else
+                operationCounter += 2;
+
             count[(array[i] / place) % 10]++;
             operationCounter++; // Increment the counter for each count operation
         }
 
         // Calculate cumulative count
         for (int i = 1; i < 10; i++) {
+            if (i > 1)
+                operationCounter += 3;
+            else
+                operationCounter += 2;
+
             count[i] += count[i - 1];
             operationCounter++; // Increment the counter for each cumulative count operation
         }
 
         // Place the elements in sorted order
         for (int i = size - 1; i >= 0; i--) {
+            if (i > 1)
+                operationCounter += 3;
+            else
+                operationCounter += 2;
+            
             output[count[(array[i] / place) % 10] - 1] = array[i];
             count[(array[i] / place) % 10]--;
             operationCounter += 2; // Increment the counter for each output and count update
@@ -45,6 +64,11 @@ class RadixSort {
     int getMax(int array[], int n) {
         int max = array[0];
         for (int i = 1; i < n; i++) {
+            if (i > 1)
+                operationCounter += 3;
+            else
+                operationCounter += 2;
+
             if (array[i] > max)
                 max = array[i];
             operationCounter++; // Increment the counter for each comparison operation
@@ -59,6 +83,8 @@ class RadixSort {
 
         int[] pass1 = new int[size];
         int[] pass2 = new int[size];
+
+        operationCounter +=3 ;
 
         // Using System.arraycopy() method to copy array elements
         System.arraycopy(array, 0, pass1, 0, size);
@@ -76,6 +102,7 @@ class RadixSort {
                 countingSort(pass2, pass1, size, place);
                 checkEven = false;
             }
+            operationCounter++;
         }
         if (!checkEven)
             System.arraycopy(pass1, 0, array, 0, size);
@@ -94,7 +121,7 @@ class RadixSort {
         //int[] data = { 9,5,7,12,2 };
         int size = data.length;
         RadixSort rs = new RadixSort();
-        
+
         System.out.println("Size of Array: " + data.length);
         System.out.println("Unsorted Array Before Sort: \n" + Arrays.toString(data));
         rs.radixSort(data, size);
