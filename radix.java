@@ -50,7 +50,7 @@ class RadixSort {
                 operationCounter += 3;
             else
                 operationCounter += 2;
-            
+
             output[count[(array[i] / place) % 10] - 1] = array[i];
             count[(array[i] / place) % 10]--;
             operationCounter += 2; // Increment the counter for each output and count update
@@ -117,10 +117,10 @@ class RadixSort {
     }
 
     // Driver code
-    public static void main(String args[]) 
+    public static void main(String args[])
     {
         Scanner input = new Scanner(System.in);
-        int N;
+        int size;
 
         System.out.print("==============================\n\n");
         System.out.print("Welcome to RADIX lol\n\n");
@@ -131,18 +131,18 @@ class RadixSort {
         System.out.print("Before we begin, please enter the size\n");
         System.out.print("of your array to be sorted.\n\n");
         System.out.print("\t=>  ");
-        N = input.nextInt();
+        size = input.nextInt();
 
-        int [] data = new int[N];
+        int [] data = new int[size];
 
         System.out.print("\nEnter the numbers to be stored in the array\n\n");
 
-        for(int i = 0; i < N; i++)
+        for(int i = 0; i < size; i++)
         {
             System.out.print("Position " + (i+1) + "\t=>  ");
             data[i] = input.nextInt();
         }
-        
+
         RadixSort rs = new RadixSort();
 
         System.out.println("Size of Array: " + data.length);
@@ -153,4 +153,3 @@ class RadixSort {
         System.out.println("Number of Operations: " + rs.getOperationCount());
     }
 }
-
