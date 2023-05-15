@@ -1,9 +1,10 @@
 import java.util.Arrays;
+import java.util.Scanner;
 
 class RadixSort2 {
 
     // Using counting sort to sort the elements in the basis of significant places
-    void countingSort2(float array[], float list[], int size, int place) {
+    void countingSort2(float[] array, float[] list, int size, int place) {
         float[] output = new float[size];
 
         int max = (int) array[0];
@@ -27,12 +28,12 @@ class RadixSort2 {
             count[(int) (array[i] * place) % 10]--;
         }
 
-        for (int i = 0; i < size; i++)
-            array[i] = output[i];
+        //Copy the array output into a separate array
+        System.arraycopy(output, 0, array, 0, size);
     }
 
     // Function to get the largest element from an array
-    float getMax2(float array[], int n) {
+    float getMax2(float[] array, int n) {
         float max = array[0];
         for (int i = 1; i < n; i++)
             if (array[i] > max)
@@ -41,7 +42,7 @@ class RadixSort2 {
     }
 
     // Main function to implement radix sort
-    void radixSort2(float array[], int size) {
+    void radixSort2(float[] array, int size) {
         // Get maximum element
         float max = getMax2(array, size);
 
@@ -94,19 +95,42 @@ class RadixSort2 {
     }
 
     // Driver code
-    public static void main(String args[]) {
-        float[] data = {121.5f, 432.8f, 564.1f, 23.7f, 1.3f, 45.9f, 788.2f};
-        //float[] data = {123.22f, 32.42349876f,15.77f};
-        int size = data.length;
+    public static void main(String[] args)
+    {
+        Scanner input = new Scanner(System.in);
+        int N;
+
+        System.out.print("==============================\n\n");
+        System.out.print("Welcome to RADIX lol\n\n");
+        System.out.print("This is a program that'll help sort\n");
+        System.out.print("numbers using Radix Sort lol.\n\n");
+        System.out.print("==============================\n\n");
+
+        System.out.print("Before we begin, please enter the size\n");
+        System.out.print("of your array to be sorted.\n\n");
+        System.out.print("\t=>  ");
+        N = input.nextInt();
+
+        float [] data = new float[N];
+
+        System.out.print("Enter the numbers to be stored in the array\n");
+
+        for(int i = 0; i < N; i++)
+        {
+            System.out.print("Position " + (i+1) + "\t=>  ");
+            data[i] = input.nextFloat();
+        }
+
         RadixSort2 rs2 = new RadixSort2();
-        rs2.radixSort2(data, size);
+        rs2.radixSort2(data, N);
         System.out.println("Sorted Array in Ascending Order: ");
         System.out.println(Arrays.toString(data));
 
-//        int maxDecimalPlaces = highestDecimalPoint(data);
-//        System.out.println("Max decimal places: " + maxDecimalPlaces);
-//        float num = 123.654454853f;
-//        int decimalPlaces = countDecimalPlaces(num);
-//        System.out.println(num);
+        /*
+            int maxDecimalPlaces = highestDecimalPoint(data);
+            System.out.println("Max decimal places: " + maxDecimalPlaces);
+            float num = 123.654454853f;
+            int decimalPlaces = countDecimalPlaces(num);
+            System.out.println(num); */
     }
 }
