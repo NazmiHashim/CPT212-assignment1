@@ -19,9 +19,10 @@ class RadixSort
         for (int i = 0; i < 10; ++i)
         {
             count[i] = 0; // fill array with zeros
-            
+            operationCounter++;
+
             //if statement to calculate number of operations
-            if (i > 1)
+            if (i >= 1)
                 operationCounter += 3;
             else
                 operationCounter += 2;
@@ -31,7 +32,7 @@ class RadixSort
         for (int i = 0; i < size; i++)
         {
             //if statement to calculate number of operations
-            if (i > 1)
+            if (i >= 1)
                 operationCounter += 3;
             else
                 operationCounter += 2;
@@ -85,9 +86,13 @@ class RadixSort
                 operationCounter += 2;
 
             if (array[i] > max)
+            {
                 max = array[i];
+                operationCounter += 2;
+            }
             operationCounter++; // Increment the counter for each comparison operation
         }
+        operationCounter++;
         return max;
     }
 
@@ -104,8 +109,10 @@ class RadixSort
 
         // Using System.arraycopy() method to copy array elements
         System.arraycopy(array, 0, pass1, 0, size);
+        operationCounter += size; // Increment the counter for each array copy operation
 
         boolean checkEven = false;
+        operationCounter++;
 
         // Apply counting sort to sort elements based on place value.
         // if it is 1st,3rd,5th... time to sort, pass1 is participated
@@ -116,18 +123,24 @@ class RadixSort
             {
                 countingSort(pass1, pass2, size, place);
                 checkEven = true;
+                operationCounter++;
             }
             else
             {
                 countingSort(pass2, pass1, size, place);
                 checkEven = false;
+                operationCounter++;
             }
             operationCounter++;
         }
-        if (!checkEven)
+        if (!checkEven) {
             System.arraycopy(pass1, 0, array, 0, size);
-        else
+            operationCounter += size; // Increment the counter for each array copy operation
+        }
+        else {
             System.arraycopy(pass2, 0, array, 0, size);
+            operationCounter += size; // Increment the counter for each array copy operation
+        }
     }
 
     // Method or function to retrieve the operation counter value
