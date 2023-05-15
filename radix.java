@@ -19,6 +19,8 @@ class RadixSort
         for (int i = 0; i < 10; ++i)
         {
             count[i] = 0; // fill array with zeros
+            
+            //if statement to calculate number of operations
             if (i > 1)
                 operationCounter += 3;
             else
@@ -28,6 +30,7 @@ class RadixSort
         // Calculate count of elements
         for (int i = 0; i < size; i++)
         {
+            //if statement to calculate number of operations
             if (i > 1)
                 operationCounter += 3;
             else
@@ -40,6 +43,7 @@ class RadixSort
         // Calculate cumulative count
         for (int i = 1; i < 10; i++)
         {
+            //if statement to calculate number of operations
             if (i > 1)
                 operationCounter += 3;
             else
@@ -52,11 +56,12 @@ class RadixSort
         // Place the elements in sorted order
         for (int i = size - 1; i >= 0; i--)
         {
+            //if statement to calculate number of operations
             if (i > 1)
                 operationCounter += 3;
             else
                 operationCounter += 2;
-            
+
             output[count[(array[i] / place) % 10] - 1] = array[i];
             count[(array[i] / place) % 10]--;
             operationCounter += 2; // Increment the counter for each output and count update
@@ -73,6 +78,7 @@ class RadixSort
         int max = array[0];
         for (int i = 1; i < n; i++)
         {
+            //if statement to calculate number of operations
             if (i > 1)
                 operationCounter += 3;
             else
@@ -91,8 +97,8 @@ class RadixSort
         // Get maximum element
         int max = getMax(array, size);
 
-        int[] pass1 = new int[size];
-        int[] pass2 = new int[size];
+        int[] pass1 = new int[size]; //first array
+        int[] pass2 = new int[size]; //second array
 
         operationCounter +=3 ;
 
@@ -124,7 +130,7 @@ class RadixSort
             System.arraycopy(pass2, 0, array, 0, size);
     }
 
-    // Getter method to retrieve the operation counter value
+    // Method or function to retrieve the operation counter value
     public int getOperationCount() {
         return operationCounter;
     }
@@ -133,7 +139,7 @@ class RadixSort
     public static void main(String[] args)
     {
         Scanner input = new Scanner(System.in);
-        int N;
+        int N; //The size of an array
 
         System.out.print("==============================\n\n");
         System.out.print("Welcome to RADIX lol\n\n");
@@ -141,6 +147,7 @@ class RadixSort
         System.out.print("numbers using Radix Sort lol.\n\n");
         System.out.print("==============================\n\n");
 
+        //The number of size array need to be entered before processing the radix sort
         System.out.print("Before we begin, please enter the size\n");
         System.out.print("of your array to be sorted.\n\n");
         System.out.print("\t=>  ");
@@ -150,6 +157,7 @@ class RadixSort
 
         System.out.print("\n\nEnter the numbers to be stored in the array\n\n");
 
+        //Insert value or elements into array
         for(int i = 0; i < N; i++)
         {
             System.out.print("Position " + (i+1) + "\t=>  ");
@@ -158,6 +166,7 @@ class RadixSort
 
         RadixSort rs = new RadixSort();
 
+        //Display output size of array, sorted array and number of operations
         System.out.println("Size of Array: " + N);
         System.out.println("Unsorted Array Before Sort: \n" + Arrays.toString(data));
         rs.radixSort(data, N);
