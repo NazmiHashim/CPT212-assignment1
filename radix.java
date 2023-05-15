@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Scanner;
 
 class RadixSort {
     private int operationCounter; // Counter to track the number of operations
@@ -116,10 +117,32 @@ class RadixSort {
     }
 
     // Driver code
-    public static void main(String args[]) {
-        int[] data = { 87, 426, 61, 409, 170, 677, 503};
-        //int[] data = { 9,5,7,12,2 };
-        int size = data.length;
+    public static void main(String args[]) 
+    {
+        Scanner input = new Scanner(System.in);
+        int N;
+
+        System.out.print("==============================\n\n");
+        System.out.print("Welcome to RADIX lol\n\n");
+        System.out.print("This is a program that'll help sort\n");
+        System.out.print("numbers using Radix Sort lol.\n\n");
+        System.out.print("==============================\n\n");
+
+        System.out.print("Before we begin, please enter the size\n");
+        System.out.print("of your array to be sorted.\n\n");
+        System.out.print("\t=>  ");
+        N = input.nextInt();
+
+        int [] data = new int[N];
+
+        System.out.print("\nEnter the numbers to be stored in the array\n\n");
+
+        for(int i = 0; i < N; i++)
+        {
+            System.out.print("Position " + (i+1) + "\t=>  ");
+            data[i] = input.nextInt();
+        }
+        
         RadixSort rs = new RadixSort();
 
         System.out.println("Size of Array: " + data.length);
