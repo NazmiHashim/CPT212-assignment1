@@ -125,29 +125,59 @@ class RadixSort2 {
 
         // Using System.arraycopy() method to copy array elements
         System.arraycopy(copy, 0, pass1, 0, size);
+        operationCounter += size; // Increment the counter for each array copy operation
 
         boolean checkEven = false;
+        operationCounter++;
 
         // Apply counting sort to sort elements based on place value.
         for (int place = 1; (int) (max * place) > 0; place *= 10){
-            if(!checkEven){
+            if(!checkEven)
+            {
                 countingSort2(pass1, pass2, size, place);
                 checkEven = true;
-            } else{
+                operationCounter++;
+            }
+            else
+            {
                 countingSort2(pass2, pass1, size, place);
                 checkEven = false;
+                operationCounter++;
             }
         }
 
 
-        if(!checkEven) {
+        if(!checkEven)
+        {
             for (int i = 0; i < size; i++)
+            {
+                //if statement to calculate number of operations
+                if (i >= 1)
+                    operationCounter += 3;
+                else
+                    operationCounter += 2;
+
                 pass1[i] = pass1[i] / 100000;
+                operationCounter++;
+            }
             System.arraycopy(pass1, 0, array, 0, size);
-        }else {
+            operationCounter += size; // Increment the counter for each array copy operation
+        }
+        else
+        {
             for (int i = 0; i < size; i++)
+            {
+                //if statement to calculate number of operations
+                if (i >= 1)
+                    operationCounter += 3;
+                else
+                    operationCounter += 2;
+
                 pass2[i] = pass2[i] / 100000;
+                operationCounter++;
+            }
             System.arraycopy(pass2, 0, array, 0, size);
+            operationCounter += size; // Increment the counter for each array copy operation
         }
     }
 
