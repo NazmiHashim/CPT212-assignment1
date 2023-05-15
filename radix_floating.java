@@ -15,7 +15,6 @@ class RadixSort2 {
         float[] output = new float[size];
         int[] count = new int[10];
 
-
         // Calculate count of elements
         for (int i = 0; i < size; i++)
         {
@@ -101,6 +100,9 @@ class RadixSort2 {
         float max = getMax2(array, size);
         float[] copy = new float[size];
 
+        int maxDecimalPoints = countDecimalPlaces(array, size); //new code
+        System.out.println(maxDecimalPoints); //new code
+
         operationCounter += 2;
 
         System.arraycopy(array, 0, copy, 0, size);
@@ -114,7 +116,7 @@ class RadixSort2 {
             else
                 operationCounter += 2;
 
-            copy[i] = copy[i] * 100000;
+            copy[i] = copy[i] * (float) Math.pow(10, maxDecimalPoints); //new code
             operationCounter++;
         }
 
@@ -157,7 +159,7 @@ class RadixSort2 {
                 else
                     operationCounter += 2;
 
-                pass1[i] = pass1[i] / 100000;
+                pass1[i] = pass1[i] / (float) Math.pow(10, maxDecimalPoints); //new code
                 operationCounter++;
             }
             System.arraycopy(pass1, 0, array, 0, size);
@@ -173,7 +175,7 @@ class RadixSort2 {
                 else
                     operationCounter += 2;
 
-                pass2[i] = pass2[i] / 100000;
+                pass2[i] = pass2[i] / (float) Math.pow(10, maxDecimalPoints); //new code
                 operationCounter++;
             }
             System.arraycopy(pass2, 0, array, 0, size);
@@ -181,11 +183,16 @@ class RadixSort2 {
         }
     }
 
-    public static int countDecimalPlaces(float num) {
-        String numberD = String.valueOf(num);
-        numberD = numberD.substring(numberD.indexOf("."));
-        System.out.println(numberD);
-        return numberD.length();
+    public static int countDecimalPlaces(float array[],int size)
+    {
+        int maxDecimalPoints = 0;
+        for (int i = 0; i < size; i++) {
+            String numberD = String.valueOf(array[i]);
+            numberD = numberD.substring(numberD.indexOf("."));
+            if(maxDecimalPoints < numberD.length())
+                maxDecimalPoints = numberD.length();
+        }
+        return maxDecimalPoints-1;
     }
 
     // Method or function to retrieve the operation counter value
