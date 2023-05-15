@@ -1,14 +1,17 @@
 import java.util.Arrays;
 import java.util.Scanner;
 
-class RadixSort2 {
+class RadixSort2
+{
 
     // Using counting sort to sort the elements in the basis of significant places
-    void countingSort2(float[] array, float[] list, int size, int place) {
+    void countingSort2(float[] array, float[] list, int size, int place)
+    {
         float[] output = new float[size];
 
         int max = (int) array[0];
-        for (int i = 1; i < size; i++) {
+        for (int i = 1; i < size; i++)
+        {
             if (array[i] > max)
                 max = (int) array[i];
         }
@@ -23,7 +26,8 @@ class RadixSort2 {
             count[i] += count[i - 1];
 
         // Place the elements in sorted order
-        for (int i = size - 1; i >= 0; i--) {
+        for (int i = size - 1; i >= 0; i--)
+        {
             list[count[(int) (array[i] * place) % 10] - 1] = array[i];
             count[(int) (array[i] * place) % 10]--;
         }
@@ -33,7 +37,8 @@ class RadixSort2 {
     }
 
     // Function to get the largest element from an array
-    float getMax2(float[] array, int n) {
+    float getMax2(float[] array, int n)
+    {
         float max = array[0];
         for (int i = 1; i < n; i++)
             if (array[i] > max)
@@ -42,7 +47,8 @@ class RadixSort2 {
     }
 
     // Main function to implement radix sort
-    void radixSort2(float[] array, int size) {
+    void radixSort2(float[] array, int size)
+    {
         // Get maximum element
         float max = getMax2(array, size);
 
@@ -55,11 +61,15 @@ class RadixSort2 {
         boolean checkEven = false;
 
         // Apply counting sort to sort elements based on place value.
-        for (int place = 1; (int) (max * place) > 0; place *= 10){
-            if(!checkEven){
+        for (int place = 1; (int) (max * place) > 0; place *= 10)
+        {
+            if(!checkEven)
+            {
                 countingSort2(pass1, pass2, size, place);
                 checkEven = true;
-            } else{
+            }
+            else
+            {
                 countingSort2(pass2, pass1, size, place);
                 checkEven = false;
             }
@@ -71,13 +81,17 @@ class RadixSort2 {
             System.arraycopy(pass2, 0, array, 0, size);
     }
 
-    public static int highestDecimalPoint(float[] arr) {
+    public static int highestDecimalPoint(float[] arr)
+    {
         int maxDecimalPoints = 0;
-        for (float f : arr) {
+        for (float f : arr)
+        {
             String[] parts = String.valueOf(f).split("\\.");
-            if (parts.length > 1) {
+            if (parts.length > 1)
+            {
                 int numDecimalPoints = parts[1].length();
-                if (numDecimalPoints > maxDecimalPoints) {
+                if (numDecimalPoints > maxDecimalPoints)
+                {
                     maxDecimalPoints = numDecimalPoints;
                 }
             }
@@ -85,11 +99,15 @@ class RadixSort2 {
         return maxDecimalPoints;
     }
 
-    public static int countDecimalPlaces(float num) {
+    public static int countDecimalPlaces(float num)
+    {
         String[] parts = String.valueOf(num).split("\\.");
-        if (parts.length == 1) {
+        if (parts.length == 1)
+        {
             return 0;
-        } else {
+        }
+        else
+        {
             return parts[1].length();
         }
     }

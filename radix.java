@@ -1,7 +1,8 @@
 import java.util.Arrays;
 import java.util.Scanner;
 
-class RadixSort {
+class RadixSort
+{
     private int operationCounter; // Counter to track the number of operations
 
     // Constructor to initialize the counter
@@ -10,11 +11,13 @@ class RadixSort {
     }
 
     // Using counting sort to sort the elements in the basis of significant places
-    void countingSort(int array[], int list[], int size, int place) {
+    void countingSort(int[] array, int[] list, int size, int place)
+    {
         int[] output = new int[size];
         int[] count = new int[10];
 
-        for (int i = 0; i < 10; ++i) {
+        for (int i = 0; i < 10; ++i)
+        {
             count[i] = 0; // fill array with zeros
             if (i > 1)
                 operationCounter += 3;
@@ -23,7 +26,8 @@ class RadixSort {
         }
 
         // Calculate count of elements
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < size; i++)
+        {
             if (i > 1)
                 operationCounter += 3;
             else
@@ -34,7 +38,8 @@ class RadixSort {
         }
 
         // Calculate cumulative count
-        for (int i = 1; i < 10; i++) {
+        for (int i = 1; i < 10; i++)
+        {
             if (i > 1)
                 operationCounter += 3;
             else
@@ -45,12 +50,13 @@ class RadixSort {
         }
 
         // Place the elements in sorted order
-        for (int i = size - 1; i >= 0; i--) {
+        for (int i = size - 1; i >= 0; i--)
+        {
             if (i > 1)
                 operationCounter += 3;
             else
                 operationCounter += 2;
-
+            
             output[count[(array[i] / place) % 10] - 1] = array[i];
             count[(array[i] / place) % 10]--;
             operationCounter += 2; // Increment the counter for each output and count update
@@ -62,9 +68,11 @@ class RadixSort {
     }
 
     // Function to get the largest element from an array
-    int getMax(int array[], int n) {
+    int getMax(int[] array, int n)
+    {
         int max = array[0];
-        for (int i = 1; i < n; i++) {
+        for (int i = 1; i < n; i++)
+        {
             if (i > 1)
                 operationCounter += 3;
             else
@@ -78,7 +86,8 @@ class RadixSort {
     }
 
     // Main function to implement radix sort
-    void radixSort(int array[], int size) {
+    void radixSort(int[] array, int size)
+    {
         // Get maximum element
         int max = getMax(array, size);
 
@@ -95,11 +104,15 @@ class RadixSort {
         // Apply counting sort to sort elements based on place value.
         // if it is 1st,3rd,5th... time to sort, pass1 is participated
         // if it is 2nd,4th, 6th... time to sort, pass2 is participated
-        for (int place = 1; max / place > 0; place *= 10) {
-            if (!checkEven) {
+        for (int place = 1; max / place > 0; place *= 10)
+        {
+            if (!checkEven)
+            {
                 countingSort(pass1, pass2, size, place);
                 checkEven = true;
-            } else {
+            }
+            else
+            {
                 countingSort(pass2, pass1, size, place);
                 checkEven = false;
             }
@@ -117,10 +130,10 @@ class RadixSort {
     }
 
     // Driver code
-    public static void main(String args[])
+    public static void main(String[] args)
     {
         Scanner input = new Scanner(System.in);
-        int size;
+        int N;
 
         System.out.print("==============================\n\n");
         System.out.print("Welcome to RADIX lol\n\n");
@@ -131,13 +144,13 @@ class RadixSort {
         System.out.print("Before we begin, please enter the size\n");
         System.out.print("of your array to be sorted.\n\n");
         System.out.print("\t=>  ");
-        size = input.nextInt();
+        N = input.nextInt();
 
-        int [] data = new int[size];
+        int [] data = new int[N];
 
-        System.out.print("\nEnter the numbers to be stored in the array\n\n");
+        System.out.print("\n\nEnter the numbers to be stored in the array\n\n");
 
-        for(int i = 0; i < size; i++)
+        for(int i = 0; i < N; i++)
         {
             System.out.print("Position " + (i+1) + "\t=>  ");
             data[i] = input.nextInt();
@@ -145,11 +158,12 @@ class RadixSort {
 
         RadixSort rs = new RadixSort();
 
-        System.out.println("Size of Array: " + data.length);
+        System.out.println("Size of Array: " + N);
         System.out.println("Unsorted Array Before Sort: \n" + Arrays.toString(data));
-        rs.radixSort(data, size);
+        rs.radixSort(data, N);
         System.out.println("Sorted Array in Ascending Order: ");
         System.out.println(Arrays.toString(data));
         System.out.println("Number of Operations: " + rs.getOperationCount());
     }
 }
+
