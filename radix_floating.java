@@ -8,18 +8,11 @@ class RadixSort2
     void countingSort2(float[] array, float[] list, int size, int place)
     {
         float[] output = new float[size];
-
-        int max = (int) array[0];
-        for (int i = 1; i < size; i++)
-        {
-            if (array[i] > max)
-                max = (int) array[i];
-        }
         int[] count = new int[10];
 
         // Calculate count of elements
         for (int i = 0; i < size; i++)
-            count[(int) (array[i] * place) % 10]++;
+            count[(int) (array[i] / place) % 10]++;
 
         // Calculate cumulative count
         for (int i = 1; i < 10; i++)
@@ -28,8 +21,8 @@ class RadixSort2
         // Place the elements in sorted order
         for (int i = size - 1; i >= 0; i--)
         {
-            list[count[(int) (array[i] * place) % 10] - 1] = array[i];
-            count[(int) (array[i] * place) % 10]--;
+            list[count[(int) (array[i] / place) % 10] - 1] = array[i];
+            count[(int) (array[i] / place) % 10]--;
         }
 
         //Copy the array output into a separate array
@@ -52,11 +45,18 @@ class RadixSort2
         // Get maximum element
         float max = getMax2(array, size);
 
+        float[] copy = new float[size];
+        System.arraycopy(array, 0, copy, 0, size);
+
+        //remove decimal point by multiplying
+        for (int i = 0; i < size; i++)
+            copy[i] = copy[i] * 100000;
+
         float[] pass1 = new float[size];
         float[] pass2 = new float[size];
 
         // Using System.arraycopy() method to copy array elements
-        System.arraycopy(array, 0, pass1, 0, size);
+        System.arraycopy(copy, 0, pass1, 0, size);
 
         boolean checkEven = false;
 
@@ -75,10 +75,15 @@ class RadixSort2
             }
         }
 
-        if(!checkEven)
+        if(!checkEven) {
+            for (int i = 0; i < size; i++)
+                pass1[i] = pass1[i] / 100000;
             System.arraycopy(pass1, 0, array, 0, size);
-        else
+        }else {
+            for (int i = 0; i < size; i++)
+                pass2[i] = pass2[i] / 100000;
             System.arraycopy(pass2, 0, array, 0, size);
+        }
     }
 
     public static int highestDecimalPoint(float[] arr)
@@ -115,32 +120,40 @@ class RadixSort2
     // Driver code
     public static void main(String[] args)
     {
-        Scanner input = new Scanner(System.in);
-        int N;
+//        Scanner input = new Scanner(System.in);
+//        int N;
+//
+//        System.out.print("==============================\n\n");
+//        System.out.print("Welcome to RADIX lol\n\n");
+//        System.out.print("This is a program that'll help sort\n");
+//        System.out.print("numbers using Radix Sort lol.\n\n");
+//        System.out.print("==============================\n\n");
+//
+//        System.out.print("Before we begin, please enter the size\n");
+//        System.out.print("of your array to be sorted.\n\n");
+//        System.out.print("\t=>  ");
+//        N = input.nextInt();
+//
+//        float [] data = new float[N];
+//
+//        System.out.print("Enter the numbers to be stored in the array\n");
+//
+//        for(int i = 0; i < N; i++)
+//        {
+//            System.out.print("Position " + (i+1) + "\t=>  ");
+//            data[i] = input.nextFloat();
+//        }
+//
+//        RadixSort2 rs2 = new RadixSort2();
+//        rs2.radixSort2(data, N);
+//        System.out.println("Sorted Array in Ascending Order: ");
+//        System.out.println(Arrays.toString(data));
 
-        System.out.print("==============================\n\n");
-        System.out.print("Welcome to RADIX lol\n\n");
-        System.out.print("This is a program that'll help sort\n");
-        System.out.print("numbers using Radix Sort lol.\n\n");
-        System.out.print("==============================\n\n");
-
-        System.out.print("Before we begin, please enter the size\n");
-        System.out.print("of your array to be sorted.\n\n");
-        System.out.print("\t=>  ");
-        N = input.nextInt();
-
-        float [] data = new float[N];
-
-        System.out.print("Enter the numbers to be stored in the array\n");
-
-        for(int i = 0; i < N; i++)
-        {
-            System.out.print("Position " + (i+1) + "\t=>  ");
-            data[i] = input.nextFloat();
-        }
-
+        float[] data = {21.44445f, 432.8f, 21.44444f, 1.743f, 2111.43562f, 3.3f, 455.9f};
+        //float[] data = {123.22f, 32.42349876f,15.77f};
+        int size = data.length;
         RadixSort2 rs2 = new RadixSort2();
-        rs2.radixSort2(data, N);
+        rs2.radixSort2(data, size);
         System.out.println("Sorted Array in Ascending Order: ");
         System.out.println(Arrays.toString(data));
 
