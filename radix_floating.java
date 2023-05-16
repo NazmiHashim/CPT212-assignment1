@@ -1,7 +1,9 @@
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.Arrays; //Importing the Arrays class to use different array methods
+import java.util.Scanner; //Importing the Scanner class for user input
 
-class RadixSort2 {
+//Class declaration
+class RadixSort2
+{
 
     private int operationCounter; // Counter to track the number of operations
 
@@ -11,8 +13,9 @@ class RadixSort2 {
     }
 
     // Using counting sort to sort the elements in the basis of significant places
-    void countingSort2(float array[], float list[], int size, int place) {
-        float[] output = new float[size];
+    void countingSort2(float[] array, float[] list, int size, int place)
+    {
+        float[] output = new float[size]; //An array to store the sorted values temporarily
         int[] count = new int[10];
 
         // Calculate count of elements
@@ -69,9 +72,9 @@ class RadixSort2 {
     }
 
     // Function to get the largest element from an array
-    float getMax2(float array[], int n)
+    float getMax2(float[] array, int n)
     {
-        float max = array[0];
+        float max = array[0]; //Variable to store the maximum value
         operationCounter++;
 
         for (int i = 1; i < n; i++)
@@ -95,10 +98,11 @@ class RadixSort2 {
     }
 
     // Main function to implement radix sort
-    void radixSort2(float array[], int size) {
+    void radixSort2(float[] array, int size)
+    {
         // Get maximum element
         float max = getMax2(array, size);
-        float[] copy = new float[size];
+        float[] copy = new float[size]; //An array to create a copy of the original
 
         int maxDecimalPoints = countDecimalPlaces(array, size); //new code
         System.out.println(maxDecimalPoints); //new code
@@ -133,7 +137,10 @@ class RadixSort2 {
         operationCounter++;
 
         // Apply counting sort to sort elements based on place value.
-        for (int place = 1; (int) (max * place) > 0; place *= 10){
+        // if it is 1st,3rd,5th... time to sort, pass1 is participated
+        // if it is 2nd,4th, 6th... time to sort, pass2 is participated
+        for (int place = 1; (int) (max * place) > 0; place *= 10)
+        {
             if(!checkEven)
             {
                 countingSort2(pass1, pass2, size, place);
@@ -183,7 +190,8 @@ class RadixSort2 {
         }
     }
 
-    public static int countDecimalPlaces(float array[],int size)
+    //A method to count the number of decimal places
+    public static int countDecimalPlaces(float[] array, int size)
     {
         int maxDecimalPoints = 0;
         for (int i = 0; i < size; i++) {
@@ -201,16 +209,18 @@ class RadixSort2 {
     }
 
     // Driver code
-    public static void main(String args[]) {
-        Scanner input = new Scanner(System.in);
-        int N;
+    public static void main(String[] args)
+    {
+        Scanner input = new Scanner(System.in); //Creating a Scanner object for user input
+        int N; //Size of the array
 
-        System.out.print("==============================\n");
+        System.out.print("==============================\n\n");
         System.out.print("Welcome to Radix Float Number\n\n");
         System.out.print("This is a program that'll help sort\n");
         System.out.print("numbers using Radix Sort.\n\n");
-        System.out.print("==============================\n");
+        System.out.print("==============================\n\n");
 
+        //The number of size array need to be entered before processing the radix sort
         System.out.print("Before we begin, please enter the size\n");
         System.out.print("of your array to be sorted.\n\n");
         System.out.print("Enter here =>  ");
@@ -218,22 +228,30 @@ class RadixSort2 {
 
         float [] data = new float[N];
 
-        System.out.print("Enter the numbers to be stored in the array\n");
+        System.out.print("\nEnter the numbers to be stored in the array\n\n");
 
+        //Insert the values into the array
         for(int i = 0; i < N; i++)
         {
             System.out.print("Position " + (i+1) + "\t=>  ");
             data[i] = input.nextFloat();
         }
 
-        RadixSort2 rs2 = new RadixSort2();
-        rs2.radixSort2(data, N);
+        RadixSort2 rs2 = new RadixSort2(); //Creating object to call the respective methods
         
         //Display output size of array, sorted array and number of operations
+        System.out.print("\n==============================\n\n");
         System.out.println("Size of Array: " + N);
-        System.out.println("Unsorted Array Before Sort: \n" + Arrays.toString(data));
-        System.out.println("Sorted Array in Ascending Order: ");
+
+        System.out.println("\nUnsorted Array Before Sort: ");
+        System.out.println(Arrays.toString(data) + "\n");
+
+        rs2.radixSort2(data, N); //Call upon the radix sort method
+
+        System.out.println("\nSorted Array in Ascending Order: ");
         System.out.println(Arrays.toString(data));
-        System.out.println("Number of Operations: " + rs2.getOperationCount());
+
+        System.out.println("\nNumber of Operations: " + rs2.getOperationCount());
+        System.out.print("\n==============================\n");
     }
 }
