@@ -227,11 +227,11 @@ class RadixSort2 {
         }
 
         RadixSort2 rs2 = new RadixSort2();
-
+        rs2.radixSort2(data, N);
+        
         //Display output size of array, sorted array and number of operations
         System.out.println("Size of Array: " + N);
         System.out.println("Unsorted Array Before Sort: \n" + Arrays.toString(data));
-        rs2.radixSort2(data, N);
         System.out.println("Sorted Array in Ascending Order: ");
         System.out.println(Arrays.toString(data));
         System.out.println("Number of Operations: " + rs2.getOperationCount());
