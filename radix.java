@@ -155,7 +155,7 @@ class RadixSort
         int N; //The size of an array
 
         System.out.print("==============================\n");
-        System.out.print("Welcome to Radix Float Number\n\n");
+        System.out.print("Welcome to Radix Integer\n\n");
         System.out.print("This is a program that'll help sort\n");
         System.out.print("numbers using Radix Sort.\n\n");
         System.out.print("==============================\n");
