@@ -154,16 +154,16 @@ class RadixSort
         Scanner input = new Scanner(System.in);
         int N; //The size of an array
 
-        System.out.print("==============================\n\n");
-        System.out.print("Welcome to RADIX lol\n\n");
+        System.out.print("==============================\n");
+        System.out.print("Welcome to Radix Float Number\n\n");
         System.out.print("This is a program that'll help sort\n");
-        System.out.print("numbers using Radix Sort lol.\n\n");
-        System.out.print("==============================\n\n");
+        System.out.print("numbers using Radix Sort.\n\n");
+        System.out.print("==============================\n");
 
         //The number of size array need to be entered before processing the radix sort
         System.out.print("Before we begin, please enter the size\n");
         System.out.print("of your array to be sorted.\n\n");
-        System.out.print("\t=>  ");
+        System.out.print("Enter here =>  ");
         N = input.nextInt();
 
         int [] data = new int[N];
