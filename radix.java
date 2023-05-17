@@ -1,3 +1,12 @@
+/* 
+Assignment 1 CPT212 
+This program is the radix sort of integer, specifically for Specification 1 in Assignment 1.
+Group members:
+1. MOHAMAD AMIRUL KHAIRI BIN HASAAN 
+2. MIOR MUHAMMAD IRFAN BIN MIOR LATFEE
+3. MOHAMAD NAZMI BIN HASHIM
+*/
+
 import java.util.Arrays; //Importing the Arrays class for various array methods
 import java.util.Scanner; //Importing the Scanner class for input
 
